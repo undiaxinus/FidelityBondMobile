@@ -3,4 +3,18 @@
     <string name="app_name">Fidelity Bond System</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_fidelity_bond">Fidelity Bond</string>
+    <string name="subtitle_sms_notification">SMS Notification System</string>
+    <string name="zero_count">0</string>
+    <string name="label_active_bonds">Active Bonds</string>
+    <string name="label_expiring_soon">Expiring Soon</string>
+    <string name="button_add_new_bond">Add New Bond</string>
+    
+    <!-- Notifications -->
+    <string name="label_unread">Unread</string>
+    <string name="label_total">Total</string>
+    
+    <!-- Navigation Header -->
+    <string name="nav_header_title">Fidelity Bond System</string>
+    <string name="nav_header_subtitle">Mobile Management System</string>
 </resources>

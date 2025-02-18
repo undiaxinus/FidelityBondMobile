@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/background">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/headerCard"
@@ -23,9 +23,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Fidelity Bond"
+                android:text="@string/title_fidelity_bond"
                 android:textAlignment="center"
-                android:textColor="@color/purple_700"
+                android:textColor="@color/primary"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -33,9 +33,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="SMS Notification System"
+                android:text="@string/subtitle_sms_notification"
                 android:textAlignment="center"
-                android:textColor="@color/purple_500"
+                android:textColor="@color/primary_light"
                 android:textSize="16sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -53,7 +53,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="16dp">
+            android:padding="16dp"
+            android:baselineAligned="false">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -66,16 +67,16 @@
                     android:id="@+id/activeBondsCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textColor="@color/purple_700"
+                    android:text="@string/zero_count"
+                    android:textColor="@color/primary"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Active Bonds"
-                    android:textColor="@color/purple_500" />
+                    android:text="@string/label_active_bonds"
+                    android:textColor="@color/primary_light" />
             </LinearLayout>
 
             <LinearLayout
@@ -89,16 +90,16 @@
                     android:id="@+id/expiringBondsCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textColor="@color/teal_700"
+                    android:text="@string/zero_count"
+                    android:textColor="@color/accent"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Expiring Soon"
-                    android:textColor="@color/teal_700" />
+                    android:text="@string/label_expiring_soon"
+                    android:textColor="@color/accent_dark" />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -109,8 +110,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:padding="12dp"
-        android:text="Add New Bond"
+        android:text="@string/button_add_new_bond"
         android:textSize="16sp"
+        android:backgroundTint="@color/primary"
         app:cornerRadius="8dp"
         app:layout_constraintTop_toBottomOf="@id/statsCard" />
 

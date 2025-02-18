@@ -17,7 +17,7 @@
             android:id="@+id/bondNumberText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/purple_700"
+            android:textColor="@color/primary"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -26,13 +26,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:textColor="@color/purple_500" />
+            android:textColor="@color/primary_light" />
 
         <TextView
             android:id="@+id/expiryDateText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:textColor="@color/teal_700" />
+            android:textColor="@color/accent" />
     </LinearLayout>
 </androidx.cardview.widget.CardView> 
