@@ -100,6 +100,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     .replace(R.id.fragmentContainer, NotificationsFragment())
                     .commit()
             }
+            R.id.nav_sms -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainer, SmsFragment.newInstance())
+                    .commit()
+            }
             R.id.nav_profile -> {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainer, ProfileFragment())
@@ -133,6 +138,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         } else {
             super.onBackPressed()
         }
+    }
+
+    fun openDrawer() {
+        drawerLayout.openDrawer(GravityCompat.START)
     }
 
     private fun setupUI() {
