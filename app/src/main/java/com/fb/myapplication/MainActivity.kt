@@ -24,9 +24,17 @@ import android.app.DatePickerDialog
 import android.widget.TextView
 import android.widget.AutoCompleteTextView
 import android.widget.ArrayAdapter
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.appcompat.widget.Toolbar
+import com.google.android.material.navigation.NavigationView
+import android.view.MenuItem
 import android.graphics.Color
+import com.fb.myapplication.fragments.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+    private lateinit var drawerLayout: DrawerLayout
     private val PERMISSION_REQUEST_CODE = 123
     private val smsManager: SmsManager by lazy {
         SmsManager.getDefault()
@@ -36,11 +44,95 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         
-        setupUI()
+        setupNavigationDrawer()
+        
+        // Show dashboard fragment by default
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, DashboardFragment())
+                .commit()
+        }
+        
         checkSmsPermission()
         
         // Start the BondExpiryService
         startService(Intent(this, BondExpiryService::class.java))
+    }
+
+    private fun setupNavigationDrawer() {
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setHomeButtonEnabled(true)
+        }
+
+        drawerLayout = findViewById(R.id.drawer_layout)
+        val navigationView: NavigationView = findViewById(R.id.nav_view)
+
+        val toggle = ActionBarDrawerToggle(
+            this,
+            drawerLayout,
+            toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        )
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        navigationView.setNavigationItemSelectedListener(this)
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.nav_dashboard -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainer, DashboardFragment())
+                    .commit()
+            }
+            R.id.nav_bonds -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainer, BondsFragment())
+                    .commit()
+            }
+            R.id.nav_notifications -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainer, NotificationsFragment())
+                    .commit()
+            }
+            R.id.nav_profile -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainer, ProfileFragment())
+                    .commit()
+            }
+            R.id.nav_settings -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainer, SettingsFragment())
+                    .commit()
+            }
+        }
+        drawerLayout.closeDrawer(GravityCompat.START)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                drawerLayout.closeDrawer(GravityCompat.START)
+            } else {
+                drawerLayout.openDrawer(GravityCompat.START)
+            }
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
     }
 
     private fun setupUI() {
