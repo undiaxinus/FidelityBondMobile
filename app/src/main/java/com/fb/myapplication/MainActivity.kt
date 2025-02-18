@@ -12,8 +12,19 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.textfield.TextInputEditText
 import java.util.Calendar
 import java.util.Date
+import java.util.Locale
+import java.text.SimpleDateFormat
+import android.view.View
+import android.view.ViewGroup
+import android.app.DatePickerDialog
+import android.widget.TextView
+import android.widget.AutoCompleteTextView
+import android.widget.ArrayAdapter
+import android.graphics.Color
 
 class MainActivity : AppCompatActivity() {
     private val PERMISSION_REQUEST_CODE = 123
@@ -40,8 +51,7 @@ class MainActivity : AppCompatActivity() {
 
         // Setup Add Bond Button
         findViewById<MaterialButton>(R.id.addBondButton).setOnClickListener {
-            // TODO: Implement add bond functionality
-            Toast.makeText(this, "Add Bond feature coming soon!", Toast.LENGTH_SHORT).show()
+            showAddBondDialog()
         }
 
         // Update stats (these would normally come from your database)
@@ -146,5 +156,156 @@ class MainActivity : AppCompatActivity() {
         if (isBondExpired(sampleBond)) {
             sendExpiryNotification(sampleBond)
         }
+    }
+
+    private fun showAddBondDialog() {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_add_bond, null)
+        
+        val dialog = MaterialAlertDialogBuilder(this)
+            .setView(dialogView)
+            .create()
+
+        // Setup rank dropdown
+        val ranks = arrayOf(
+            "Pat",
+            "PCpl",
+            "PSSg",
+            "PMSg",
+            "PSMS",
+            "PCMS",
+            "PEMS",
+            "PLT",
+            "PCPT",
+            "PMAJ",
+            "PLTCOL",
+            "PCOL",
+            "PBGEN",
+            "PMGEN",
+            "PLTGEN",
+            "PGEN",
+            "NUP"
+        )
+        
+        // Setup units dropdown
+        val units = arrayOf(
+            "RMFB5",
+            "AVSEU5",
+            "NAGA CPO",
+            "ALBAY PPO",
+            "CAMARINES NORTE PPO",
+            "CAMARINES SUR PPO",
+            "CATANDUANES PPO",
+            "MASBATE PPO",
+            "SORSOGON PPO",
+            "RHQ",
+            "SDO/DO",
+            "SUPPLY ACCOUNTABLE OFFICERS",
+            "RIASS",
+            "RHFPU5",
+            "RMU5",
+            "CIDG RFU5",
+            "RIU5",
+            "RFU5",
+            "RACU5",
+            "SAF"
+        )
+
+        // Setup rank dropdown
+        val rankInput = dialogView.findViewById<AutoCompleteTextView>(R.id.rankInput)
+        val rankAdapter = ArrayAdapter(this, R.layout.dropdown_item, ranks)
+        rankInput.setAdapter(rankAdapter)
+
+        // Setup unit dropdown
+        val unitInput = dialogView.findViewById<AutoCompleteTextView>(R.id.unitInput)
+        val unitAdapter = ArrayAdapter(this, R.layout.dropdown_item, units)
+        unitInput.setAdapter(unitAdapter)
+
+        // Setup date pickers and status fields
+        val effectiveDateInput = dialogView.findViewById<TextInputEditText>(R.id.effectiveDateInput)
+        val expirationDateInput = dialogView.findViewById<TextInputEditText>(R.id.expirationDateInput)
+        val statusInput = dialogView.findViewById<TextInputEditText>(R.id.statusInput)
+        val daysRemainingInput = dialogView.findViewById<TextInputEditText>(R.id.daysRemainingInput)
+        
+        setupDatePicker(effectiveDateInput)
+        setupDatePicker(expirationDateInput)
+
+        // Update status and days remaining when expiration date changes
+        expirationDateInput.setOnClickListener {
+            val datePickerDialog = DatePickerDialog(
+                this,
+                { _, year, month, day ->
+                    val calendar = Calendar.getInstance()
+                    calendar.set(year, month, day)
+                    val dateFormat = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
+                    expirationDateInput.setText(dateFormat.format(calendar.time))
+                    
+                    // Calculate and update status and days remaining
+                    updateStatusAndDaysRemaining(calendar.time, statusInput, daysRemainingInput)
+                },
+                Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+            )
+            datePickerDialog.show()
+        }
+
+        // Setup buttons
+        dialogView.findViewById<MaterialButton>(R.id.cancelButton)?.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialogView.findViewById<MaterialButton>(R.id.submitButton)?.setOnClickListener {
+            // TODO: Validate and save bond data
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    private fun setupDatePicker(editText: TextInputEditText) {
+        val calendar = Calendar.getInstance()
+        
+        val datePickerDialog = DatePickerDialog(
+            this,
+            { _, year, month, day ->
+                calendar.set(year, month, day)
+                val dateFormat = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
+                editText.setText(dateFormat.format(calendar.time))
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+
+        editText.setOnClickListener {
+            datePickerDialog.show()
+        }
+    }
+
+    private fun updateStatusAndDaysRemaining(
+        expiryDate: Date,
+        statusInput: TextInputEditText,
+        daysRemainingInput: TextInputEditText
+    ) {
+        val today = Calendar.getInstance().time
+        val daysRemaining = ((expiryDate.time - today.time) / (1000 * 60 * 60 * 24)).toInt()
+        
+        val status = when {
+            daysRemaining < 0 -> "EXPIRED"
+            daysRemaining <= 30 -> "ABOUT TO EXPIRE"
+            else -> "VALID"
+        }
+        
+        val statusColor = when (status) {
+            "EXPIRED" -> Color.RED
+            "ABOUT TO EXPIRE" -> Color.parseColor("#FFA500") // Orange
+            else -> Color.parseColor("#008000") // Green
+        }
+        
+        statusInput.setText(status)
+        statusInput.setTextColor(statusColor)
+        
+        daysRemainingInput.setText(if (daysRemaining < 0) "Expired" else "$daysRemaining days")
+        daysRemainingInput.setTextColor(statusColor)
     }
 } 
