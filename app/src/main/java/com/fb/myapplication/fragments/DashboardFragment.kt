@@ -31,7 +31,6 @@ class DashboardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         
         setupStatCards(view)
-        setupTodoList(view)
         setupCalendar(view)
         setupContactList(view)
     }
@@ -66,23 +65,6 @@ class DashboardFragment : Fragment() {
             findViewById<TextView>(R.id.validCount).text = valid.toString()
             findViewById<TextView>(R.id.expiringCount).text = expiring.toString()
             findViewById<TextView>(R.id.expiredCount).text = expired.toString()
-        }
-    }
-
-    private fun setupTodoList(view: View) {
-        val todoInput = view.findViewById<EditText>(R.id.todoInput)
-        val submitButton = view.findViewById<MaterialButton>(R.id.submitTodo)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.todoRecyclerView)
-
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        // TODO: Set up RecyclerView adapter for todo list
-
-        submitButton.setOnClickListener {
-            val text = todoInput.text.toString()
-            if (text.isNotEmpty()) {
-                // TODO: Add todo item to list
-                todoInput.text.clear()
-            }
         }
     }
 

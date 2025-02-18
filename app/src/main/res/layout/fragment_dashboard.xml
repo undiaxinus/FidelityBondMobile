@@ -12,23 +12,23 @@
         android:paddingHorizontal="12dp"
         android:paddingVertical="16dp">
 
-        <!-- Stats Cards Row -->
-        <LinearLayout
-            android:id="@+id/statsRow"
+        <!-- Stats Cards Grid -->
+        <GridLayout
+            android:id="@+id/statsGrid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="4"
-            android:clipToPadding="false"
-            android:paddingHorizontal="4dp"
+            android:columnCount="2"
+            android:rowCount="2"
+            android:alignmentMode="alignMargins"
+            android:useDefaultMargins="true"
             app:layout_constraintTop_toTopOf="parent">
 
             <!-- Grand Total Card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
                 android:layout_height="120dp"
+                android:layout_columnWeight="1"
                 android:layout_marginHorizontal="4dp"
-                android:layout_weight="1"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="2dp"
                 app:cardBackgroundColor="@color/card_total">
@@ -81,8 +81,8 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
                 android:layout_height="120dp"
+                android:layout_columnWeight="1"
                 android:layout_marginHorizontal="4dp"
-                android:layout_weight="1"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="2dp"
                 app:cardBackgroundColor="@color/card_valid">
@@ -135,8 +135,8 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
                 android:layout_height="120dp"
+                android:layout_columnWeight="1"
                 android:layout_marginHorizontal="4dp"
-                android:layout_weight="1"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="2dp"
                 app:cardBackgroundColor="@color/card_expiring">
@@ -189,8 +189,8 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
                 android:layout_height="120dp"
+                android:layout_columnWeight="1"
                 android:layout_marginHorizontal="4dp"
-                android:layout_weight="1"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="2dp"
                 app:cardBackgroundColor="@color/card_expired">
@@ -238,7 +238,7 @@
                         android:paddingVertical="0dp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
-        </LinearLayout>
+        </GridLayout>
 
         <!-- Content Section -->
         <LinearLayout
@@ -249,7 +249,7 @@
             android:layout_marginTop="24dp"
             android:clipToPadding="false"
             android:paddingHorizontal="4dp"
-            app:layout_constraintTop_toBottomOf="@id/statsRow">
+            app:layout_constraintTop_toBottomOf="@id/statsGrid">
 
             <!-- Main Column -->
             <LinearLayout
@@ -257,66 +257,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
-
-                <!-- To Do List Card -->
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/todoSection"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp"
-                    app:cardBackgroundColor="@color/surface"
-                    android:layout_marginBottom="16dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/label_todo_list"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/text_primary"
-                            android:fontFamily="sans-serif-medium" />
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/todoInput"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/hint_type_message"
-                                android:inputType="text"
-                                android:maxLines="1" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/submitTodo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="end"
-                            android:text="@string/button_send"
-                            android:layout_marginTop="8dp" />
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/todoRecyclerView"
-                            android:layout_width="match_parent"
-                            android:layout_height="200dp"
-                            android:layout_marginTop="16dp"
-                            android:background="@color/card_bg_dark"
-                            android:padding="8dp"
-                            android:clipToPadding="false" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
 
                 <!-- Calendar Card -->
                 <com.google.android.material.card.MaterialCardView
