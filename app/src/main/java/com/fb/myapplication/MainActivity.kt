@@ -95,19 +95,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     .replace(R.id.fragmentContainer, BondsFragment())
                     .commit()
             }
-            R.id.nav_notifications -> {
+            R.id.nav_profile -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainer, NotificationsFragment())
+                    .replace(R.id.fragmentContainer, ProfileFragment())
                     .commit()
             }
             R.id.nav_sms -> {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainer, SmsFragment.newInstance())
-                    .commit()
-            }
-            R.id.nav_profile -> {
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainer, ProfileFragment())
                     .commit()
             }
             R.id.nav_settings -> {
@@ -142,26 +137,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     fun openDrawer() {
         drawerLayout.openDrawer(GravityCompat.START)
-    }
-
-    private fun setupUI() {
-        // Setup RecyclerView
-        val recyclerView = findViewById<RecyclerView>(R.id.bondsRecyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        // TODO: Set adapter for RecyclerView
-
-        // Setup Add Bond Button
-        findViewById<MaterialButton>(R.id.addBondButton).setOnClickListener {
-            showAddBondDialog()
-        }
-
-        // Update stats (these would normally come from your database)
-        updateStats(activeBonds = 5, expiringBonds = 2)
-    }
-
-    private fun updateStats(activeBonds: Int, expiringBonds: Int) {
-        findViewById<android.widget.TextView>(R.id.activeBondsCount).text = activeBonds.toString()
-        findViewById<android.widget.TextView>(R.id.expiringBondsCount).text = expiringBonds.toString()
     }
 
     private fun checkSmsPermission() {

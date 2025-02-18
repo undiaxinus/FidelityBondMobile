@@ -1,14 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Base Theme Colors -->
     <color name="primary">#006400</color>
     <color name="primary_dark">#004D00</color>
     <color name="primary_light">#338033</color>
     <color name="accent">#FFD700</color>
     <color name="accent_dark">#CCB100</color>
     <color name="accent_light">#FFE44D</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="background">#FFFFFF</color>
+    
+    <!-- Dashboard Card Colors -->
+    <color name="card_total">#1E88E5</color>         <!-- Blue -->
+    <color name="card_valid">#43A047</color>         <!-- Green -->
+    <color name="card_expiring">#FDD835</color>      <!-- Yellow -->
+    <color name="card_expired">#E53935</color>       <!-- Red -->
+    
+    <!-- Card Background Colors -->
+    <color name="card_bg_light">#FFFFFF</color>
+    <color name="card_bg_dark">#F5F5F5</color>
+    
+    <!-- Text Colors -->
     <color name="text_primary">#212121</color>
     <color name="text_secondary">#757575</color>
+    <color name="text_white">#FFFFFF</color>
+    <color name="text_dark">#000000</color>
+    
+    <!-- Background Colors -->
+    <color name="background">#F8F9FA</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="divider">#E0E0E0</color>
+    
+    <!-- System Colors -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
 </resources>

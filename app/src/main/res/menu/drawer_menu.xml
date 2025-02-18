@@ -10,10 +10,6 @@
             android:icon="@android:drawable/ic_menu_agenda"
             android:title="Bonds" />
         <item
-            android:id="@+id/nav_notifications"
-            android:icon="@android:drawable/ic_popup_reminder"
-            android:title="Notifications" />
-        <item
             android:id="@+id/nav_profile"
             android:icon="@android:drawable/ic_menu_myplaces"
             android:title="Profile" />

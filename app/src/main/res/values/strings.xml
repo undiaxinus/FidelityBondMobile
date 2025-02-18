@@ -5,6 +5,20 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="title_fidelity_bond">Fidelity Bond</string>
     <string name="subtitle_sms_notification">SMS Notification System</string>
+    
+    <!-- Dashboard -->
+    <string name="label_grand_total">Grand total</string>
+    <string name="label_valid">Valid</string>
+    <string name="label_about_to_expire">About to expire</string>
+    <string name="label_expired">Expired</string>
+    <string name="label_contact_list">Contact List</string>
+    <string name="label_calendar">Calendar</string>
+    <string name="label_todo_list">To Do List</string>
+    <string name="hint_type_message">Type your message...</string>
+    <string name="button_send">Send</string>
+    <string name="button_more_info">More info</string>
+    
+    <!-- Other existing strings -->
     <string name="zero_count">0</string>
     <string name="label_active_bonds">Active Bonds</string>
     <string name="label_expiring_soon">Expiring Soon</string>
@@ -15,6 +29,13 @@
     <string name="label_total">Total</string>
     
     <!-- Navigation Header -->
-    <string name="nav_header_title">Fidelity Bond System</string>
-    <string name="nav_header_subtitle">Mobile Management System</string>
+    <string name="nav_header_title">Fidelity Bond</string>
+    <string name="nav_header_subtitle">Alert Monitoring System</string>
+
+    <!-- Profile -->
+    <string name="button_edit_profile">Edit Profile</string>
+    <string name="button_logout">Logout</string>
+    <string name="logout_confirmation">Are you sure you want to logout?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

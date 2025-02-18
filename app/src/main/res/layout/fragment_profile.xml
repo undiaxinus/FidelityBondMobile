@@ -48,6 +48,24 @@
                     android:text="PCPT"
                     android:textAlignment="center"
                     android:textSize="18sp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/editProfileButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/button_edit_profile"
+                    app:icon="@android:drawable/ic_menu_edit" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/logoutButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/button_logout"
+                    android:backgroundTint="@color/accent"
+                    app:icon="@android:drawable/ic_lock_power_off" />
+
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
@@ -101,13 +119,6 @@
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/editProfileButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Edit Profile"
-            app:cornerRadius="8dp" />
 
     </LinearLayout>
 
