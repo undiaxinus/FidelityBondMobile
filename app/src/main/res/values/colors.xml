@@ -32,4 +32,12 @@
     <!-- System Colors -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    
+    <!-- Calendar specific colors -->
+    <color name="calendar_selected_day_bg">@color/primary_light</color>
+    <color name="calendar_selected_day_text">@color/text_white</color>
+    <color name="calendar_default_day_text">@color/text_primary</color>
+    <color name="calendar_header_bg">@color/surface</color>
+    <color name="calendar_selected_day">@color/primary_light</color>
+    <color name="calendar_selected_text">@color/text_white</color>
 </resources>

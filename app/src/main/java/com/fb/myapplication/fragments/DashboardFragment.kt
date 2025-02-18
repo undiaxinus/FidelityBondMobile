@@ -1,17 +1,20 @@
 package com.fb.myapplication.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
 import android.widget.EditText
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fb.myapplication.R
 import com.google.android.material.button.MaterialButton
+import java.util.*
 
 class DashboardFragment : Fragment() {
     private val units = listOf(
@@ -70,8 +73,19 @@ class DashboardFragment : Fragment() {
 
     private fun setupCalendar(view: View) {
         val calendarView = view.findViewById<CalendarView>(R.id.calendarView)
-        calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
-            // TODO: Handle date selection
+        
+        calendarView.apply {
+            // Set calendar colors programmatically
+            setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.surface))
+            
+            // Set date selection listener
+            setOnDateChangeListener { _, year, month, dayOfMonth ->
+                // Handle date selection
+                val selectedDate = Calendar.getInstance().apply {
+                    set(year, month, dayOfMonth)
+                }
+                // TODO: Handle the selected date
+            }
         }
     }
 

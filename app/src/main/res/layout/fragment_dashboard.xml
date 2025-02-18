@@ -288,7 +288,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:background="@color/card_bg_dark" />
+                            android:theme="@style/CustomCalendarView"
+                            android:weekDayTextAppearance="@style/CalendarHeaderStyle"
+                            android:dateTextAppearance="@style/CalendarDayStyle"
+                            android:background="@color/surface" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
