@@ -4,30 +4,41 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.fb.myapplication.R
-import de.hdodenhof.circleimageview.CircleImageView
 import java.text.SimpleDateFormat
 import java.util.*
 
-data class Message(
-    val contactName: String,
-    val messagePreview: String,
-    val timestamp: Date,
-    val contactImageResId: Int = R.drawable.ic_person
-)
-
 class MessagesAdapter(
+    private var messages: List<Message> = emptyList(),
     private val onMessageClick: (Message) -> Unit
-) : ListAdapter<Message, MessagesAdapter.MessageViewHolder>(MessageDiffCallback()) {
+) : RecyclerView.Adapter<MessagesAdapter.MessageViewHolder>() {
+
+    fun getMessages(): List<Message> = messages
 
     class MessageViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val contactImage: CircleImageView = view.findViewById(R.id.contactImage)
-        val contactName: TextView = view.findViewById(R.id.contactName)
-        val messagePreview: TextView = view.findViewById(R.id.messagePreview)
-        val messageTime: TextView = view.findViewById(R.id.messageTime)
+        private val contentText: TextView = view.findViewById(R.id.messageContent)
+        private val timestampText: TextView = view.findViewById(R.id.messageTimestamp)
+        private val phoneNumberText: TextView = view.findViewById(R.id.phoneNumber)
+        private val bondNumberText: TextView = view.findViewById(R.id.bondNumber)
+
+        fun bind(message: Message, onMessageClick: (Message) -> Unit) {
+            contentText.text = message.content
+            timestampText.text = formatTimestamp(message.timestamp)
+            phoneNumberText.text = message.phoneNumber ?: "N/A"
+            bondNumberText.text = message.bondNumber ?: "N/A"
+
+            // Apply read/unread styling
+            itemView.alpha = if (message.isRead) 0.7f else 1.0f
+            
+            itemView.setOnClickListener { onMessageClick(message) }
+        }
+
+        private fun formatTimestamp(timestamp: Long): String {
+            val date = Date(timestamp)
+            val format = SimpleDateFormat("MMM dd, yyyy HH:mm", Locale.getDefault())
+            return format.format(date)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
@@ -37,28 +48,13 @@ class MessagesAdapter(
     }
 
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
-        val message = getItem(position)
-        
-        holder.contactImage.setImageResource(message.contactImageResId)
-        holder.contactName.text = message.contactName
-        holder.messagePreview.text = message.messagePreview
-        
-        val timeFormat = SimpleDateFormat("h:mm a", Locale.getDefault())
-        holder.messageTime.text = timeFormat.format(message.timestamp)
-
-        holder.itemView.setOnClickListener {
-            onMessageClick(message)
-        }
+        holder.bind(messages[position], onMessageClick)
     }
 
-    private class MessageDiffCallback : DiffUtil.ItemCallback<Message>() {
-        override fun areItemsTheSame(oldItem: Message, newItem: Message): Boolean {
-            return oldItem.contactName == newItem.contactName && 
-                   oldItem.timestamp == newItem.timestamp
-        }
+    override fun getItemCount() = messages.size
 
-        override fun areContentsTheSame(oldItem: Message, newItem: Message): Boolean {
-            return oldItem == newItem
-        }
+    fun updateMessages(newMessages: List<Message>) {
+        messages = newMessages
+        notifyDataSetChanged()
     }
 } 
