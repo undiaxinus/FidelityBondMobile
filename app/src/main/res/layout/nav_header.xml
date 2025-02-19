@@ -5,10 +5,13 @@
     android:background="@color/primary"
     android:gravity="bottom"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingTop="48dp"
+    android:paddingBottom="16dp"
+    android:theme="@style/ThemeOverlay.MaterialComponents.Dark">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:src="@drawable/financelogo"
@@ -19,14 +22,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/nav_header_title"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="16sp" />
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/nav_header_subtitle"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+        android:textColor="@color/white"
+        android:alpha="0.7"
         android:textSize="14sp" />
 
 </LinearLayout> 

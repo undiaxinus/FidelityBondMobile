@@ -1,33 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:padding="16dp">
+    android:background="@drawable/gradient_animation"
+    android:padding="24dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/logoImage"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
         android:src="@drawable/financelogo"
-        app:civ_border_width="2dp"
+        app:civ_border_width="3dp"
         app:civ_border_color="@color/primary"
+        android:elevation="4dp"
         app:layout_constraintBottom_toTopOf="@+id/titleText"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintVertical_bias="0.3" />
 
     <TextView
         android:id="@+id/titleText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Fidelity Bond System"
+        android:layout_marginTop="24dp"
+        android:layout_marginHorizontal="16dp"
+        android:text="@string/title_fidelity_bond"
+        android:textAlignment="center"
         android:textColor="@color/primary"
-        android:textSize="24sp"
+        android:textSize="28sp"
         android:textStyle="bold"
+        android:fontFamily="sans-serif-medium"
+        android:lineSpacingExtra="8dp"
         app:layout_constraintBottom_toTopOf="@+id/loginCard"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -38,8 +45,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        app:cardCornerRadius="12dp"
+        app:cardCornerRadius="16dp"
         app:cardElevation="4dp"
+        app:cardBackgroundColor="@color/white"
+        android:layout_marginHorizontal="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleText">
 
@@ -47,14 +56,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="24dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Welcome Back"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="24dp"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/usernameLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Username"
-                app:startIconDrawable="@android:drawable/ic_menu_myplaces">
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:startIconDrawable="@android:drawable/ic_menu_myplaces"
+                app:startIconTint="@color/primary"
+                android:layout_marginBottom="16dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/usernameInput"
@@ -69,10 +90,12 @@
                 android:id="@+id/passwordLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:hint="Password"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:endIconMode="password_toggle"
-                app:startIconDrawable="@android:drawable/ic_lock_idle_lock">
+                app:startIconDrawable="@android:drawable/ic_lock_idle_lock"
+                app:startIconTint="@color/primary"
+                android:layout_marginBottom="24dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/passwordInput"
@@ -86,13 +109,13 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/loginButton"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:padding="12dp"
+                android:layout_height="56dp"
                 android:text="Login"
                 android:textSize="16sp"
+                android:textAllCaps="false"
                 android:backgroundTint="@color/primary"
-                app:cornerRadius="8dp" />
+                app:cornerRadius="12dp"
+                android:elevation="2dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/forgotPasswordButton"
@@ -101,7 +124,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Forgot Password?"
-                android:textColor="@color/primary" />
+                android:textAllCaps="false"
+                android:layout_marginTop="8dp"
+                android:textColor="@android:color/darker_gray" />
 
         </LinearLayout>
 

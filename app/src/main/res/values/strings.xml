@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Fidelity Bond System</string>
+    <string name="app_name">Fidelity Bond Alert Monitoring System</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="title_fidelity_bond">Fidelity Bond</string>
+    <string name="title_fidelity_bond">Fidelity Bond Alert Monitoring System</string>
     <string name="subtitle_sms_notification">SMS Notification System</string>
     
     <!-- Dashboard -->

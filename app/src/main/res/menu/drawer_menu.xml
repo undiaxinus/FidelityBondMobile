@@ -1,25 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="single">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/main_group">
         <item
             android:id="@+id/nav_dashboard"
-            android:icon="@android:drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_dashboard"
             android:title="Dashboard" />
         <item
             android:id="@+id/nav_bonds"
-            android:icon="@android:drawable/ic_menu_agenda"
+            android:icon="@drawable/ic_bonds"
             android:title="Bonds" />
         <item
             android:id="@+id/nav_profile"
-            android:icon="@android:drawable/ic_menu_myplaces"
+            android:icon="@drawable/ic_profile"
             android:title="Profile" />
+    </group>
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/secondary_group">
         <item
             android:id="@+id/nav_sms"
-            android:icon="@android:drawable/ic_dialog_email"
+            android:icon="@drawable/ic_messages"
             android:title="Messages" />
         <item
             android:id="@+id/nav_settings"
-            android:icon="@android:drawable/ic_menu_manage"
+            android:icon="@drawable/ic_settings"
             android:title="Settings" />
     </group>
 </menu> 

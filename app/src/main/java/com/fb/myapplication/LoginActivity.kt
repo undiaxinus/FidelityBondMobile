@@ -1,6 +1,7 @@
 package com.fb.myapplication
 
 import android.content.Intent
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -22,6 +23,12 @@ class LoginActivity : AppCompatActivity() {
 
         // Hide the action bar
         supportActionBar?.hide()
+
+        // Start background animation
+        val animDrawable = findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.rootLayout).background as AnimationDrawable
+        animDrawable.setEnterFadeDuration(2000)
+        animDrawable.setExitFadeDuration(4000)
+        animDrawable.start()
 
         val usernameLayout = findViewById<TextInputLayout>(R.id.usernameLayout)
         val passwordLayout = findViewById<TextInputLayout>(R.id.passwordLayout)
