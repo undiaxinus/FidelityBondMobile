@@ -14,7 +14,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         // User table
         private const val TABLE_USERS = "users"
         private const val COLUMN_ID = "id"
-        private const val COLUMN_USERNAME = "username"
+        private const val COLUMN_EMAIL = "email"
         private const val COLUMN_PASSWORD = "password"
         private const val COLUMN_RANK = "rank"
         private const val COLUMN_UNIT = "unit"
@@ -25,7 +25,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         val createTable = """
             CREATE TABLE $TABLE_USERS (
                 $COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT,
-                $COLUMN_USERNAME TEXT UNIQUE NOT NULL,
+                $COLUMN_EMAIL TEXT UNIQUE NOT NULL,
                 $COLUMN_PASSWORD TEXT NOT NULL,
                 $COLUMN_RANK TEXT NOT NULL,
                 $COLUMN_UNIT TEXT NOT NULL,
@@ -37,7 +37,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
         // Insert default admin user
         val adminValues = ContentValues().apply {
-            put(COLUMN_USERNAME, "admin")
+            put(COLUMN_EMAIL, "admin@example.com")
             put(COLUMN_PASSWORD, "admin123") // In production, this should be hashed
             put(COLUMN_RANK, "ADMIN")
             put(COLUMN_UNIT, "HQ")
@@ -47,14 +47,14 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
         // Insert some sample users
         val sampleUsers = arrayOf(
-            arrayOf("pcpt_john", "pass123", "PCPT", "NAGA CPO", "John Smith"),
-            arrayOf("pmaj_sarah", "pass456", "PMAJ", "ALBAY PPO", "Sarah Johnson"),
-            arrayOf("pltcol_mike", "pass789", "PLTCOL", "RHQ", "Mike Wilson")
+            arrayOf("john@army.com", "pass123", "PCPT", "NAGA CPO", "John Smith"),
+            arrayOf("sarah@army.com", "pass456", "PMAJ", "ALBAY PPO", "Sarah Johnson"),
+            arrayOf("mike@army.com", "pass789", "PLTCOL", "RHQ", "Mike Wilson")
         )
 
         sampleUsers.forEach { user ->
             val values = ContentValues().apply {
-                put(COLUMN_USERNAME, user[0])
+                put(COLUMN_EMAIL, user[0])
                 put(COLUMN_PASSWORD, user[1])
                 put(COLUMN_RANK, user[2])
                 put(COLUMN_UNIT, user[3])
@@ -69,13 +69,13 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         onCreate(db)
     }
 
-    fun validateUser(username: String, password: String): UserData? {
+    fun validateUser(email: String, password: String): UserData? {
         val db = this.readableDatabase
         val cursor = db.query(
             TABLE_USERS,
-            arrayOf(COLUMN_ID, COLUMN_USERNAME, COLUMN_RANK, COLUMN_UNIT, COLUMN_FULL_NAME),
-            "$COLUMN_USERNAME = ? AND $COLUMN_PASSWORD = ?",
-            arrayOf(username, password),
+            arrayOf(COLUMN_ID, COLUMN_EMAIL, COLUMN_RANK, COLUMN_UNIT, COLUMN_FULL_NAME),
+            "$COLUMN_EMAIL = ? AND $COLUMN_PASSWORD = ?",
+            arrayOf(email, password),
             null,
             null,
             null
@@ -84,7 +84,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return if (cursor.moveToFirst()) {
             UserData(
                 id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID)),
-                username = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_USERNAME)),
+                username = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EMAIL)),
                 rank = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_RANK)),
                 unit = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_UNIT)),
                 fullName = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_FULL_NAME))

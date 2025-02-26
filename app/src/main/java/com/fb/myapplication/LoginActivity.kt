@@ -38,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
         val forgotPasswordButton = findViewById<MaterialButton>(R.id.forgotPasswordButton)
 
         loginButton.setOnClickListener {
-            val username = usernameInput.text.toString()
+            val email = usernameInput.text.toString()
             val password = passwordInput.text.toString()
 
             // Clear previous errors
@@ -46,14 +46,17 @@ class LoginActivity : AppCompatActivity() {
             passwordLayout.error = null
 
             when {
-                username.isEmpty() -> {
-                    usernameLayout.error = "Username is required"
+                email.isEmpty() -> {
+                    usernameLayout.error = "Email is required"
+                }
+                !isValidEmail(email) -> {
+                    usernameLayout.error = "Please enter a valid email address"
                 }
                 password.isEmpty() -> {
                     passwordLayout.error = "Password is required"
                 }
                 else -> {
-                    val userData = dbHelper.validateUser(username, password)
+                    val userData = dbHelper.validateUser(email, password)
                     if (userData != null) {
                         // Show welcome toast with user's name and rank
                         Toast.makeText(
@@ -84,22 +87,26 @@ class LoginActivity : AppCompatActivity() {
                 Available test accounts:
                 
                 1. Admin:
-                   Username: admin
+                   Email: admin@example.com
                    Password: admin123
                 
                 2. Captain:
-                   Username: pcpt_john
+                   Email: john@army.com
                    Password: pass123
                 
                 3. Major:
-                   Username: pmaj_sarah
+                   Email: sarah@army.com
                    Password: pass456
                 
                 4. Lieutenant Colonel:
-                   Username: pltcol_mike
+                   Email: mike@army.com
                    Password: pass789
             """.trimIndent())
             .setPositiveButton("OK", null)
             .show()
+    }
+
+    private fun isValidEmail(email: String): Boolean {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 } 

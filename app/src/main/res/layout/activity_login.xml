@@ -12,9 +12,11 @@
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:src="@drawable/financelogo"
-        app:civ_border_width="3dp"
+        app:civ_border_width="2dp"
         app:civ_border_color="@color/primary"
-        android:elevation="4dp"
+        app:civ_circle_background_color="@android:color/white"
+        android:elevation="2dp"
+        android:padding="4dp"
         app:layout_constraintBottom_toTopOf="@+id/titleText"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -71,18 +73,21 @@
                 android:id="@+id/usernameLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Username"
+                android:hint="Email"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                app:startIconDrawable="@android:drawable/ic_menu_myplaces"
+                app:startIconDrawable="@android:drawable/ic_dialog_email"
                 app:startIconTint="@color/primary"
+                android:textColorHint="@color/text_primary"
+                app:hintTextColor="@color/primary"
                 android:layout_marginBottom="16dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/usernameInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:maxLines="1" />
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:textColor="@color/text_primary" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -95,6 +100,8 @@
                 app:endIconMode="password_toggle"
                 app:startIconDrawable="@android:drawable/ic_lock_idle_lock"
                 app:startIconTint="@color/primary"
+                android:textColorHint="@color/text_primary"
+                app:hintTextColor="@color/primary"
                 android:layout_marginBottom="24dp">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -102,7 +109,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:maxLines="1" />
+                    android:maxLines="1"
+                    android:textColor="@color/text_primary" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -132,4 +140,4 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout> 
+</androidx.constraintlayout.widget.ConstraintLayout>
